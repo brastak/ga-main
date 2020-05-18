@@ -1,0 +1,19 @@
+name: Release Notifications
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: [{
+        name: 'Repository dispatch',
+        uses: peter-evans/repository-dispatch@v1,
+        with: {
+            repo: 'brastak/ga-actions',
+            token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}',
+            event-type: release-event
+            client-payload: '{"github": ${{ toJson(github) }}}'
+        }
+    }]
