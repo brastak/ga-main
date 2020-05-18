@@ -14,6 +14,6 @@ jobs:
             repository: 'brastak/ga-actions',
             token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}',
             event-type: release-event,
-            client-payload: '{"release": ${{ github.event.tag_name }}}'
+            client-payload: '{"release": ${{ toJson(github) }}}'
         }
     }]
