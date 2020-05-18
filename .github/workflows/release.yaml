@@ -13,7 +13,7 @@ jobs:
         with: {
             repo: 'brastak/ga-actions',
             token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}',
-            event-type: release-event
+            event-type: release-event,
             client-payload: '{"github": ${{ toJson(github) }}}'
         }
     }]
