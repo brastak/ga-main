@@ -14,7 +14,7 @@ jobs:
           aws-access-key: '${{ secrets.PERF_AWS_ACCESS_KEY }}'
           aws-secret-key: '${{ secrets.PERF_AWS_SECRET_KEY }}'
           adapter: 'files'
-          sceanrio: 'upload-files.jmx'
+          scenario: 'upload-files.jmx'
           version: "${{ github.event.release.tag_name }}"}'
       - name: Publish reports
         uses: JamesIves/github-pages-deploy-action@releases/v3
