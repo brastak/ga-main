@@ -15,7 +15,9 @@ jobs:
           aws-secret-key: '${{ secrets.PERF_AWS_SECRET_KEY }}'
           adapter: 'files'
           scenario: 'upload-files.jmx'
-          version: "${{ github.event.release.tag_name }}"
+          version: 'latest'
+      - name: Check results
+        run: ls -la
       - name: Publish reports
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
