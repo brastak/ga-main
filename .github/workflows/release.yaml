@@ -1,19 +1,25 @@
-name: Release Notifications
+name: Artipie Benchmarks
 
 on:
   release:
     types: [published]
 
 jobs:
-  build:
+  benchmarks:
     runs-on: ubuntu-latest
-    steps: [{
-        name: 'Repository dispatch',
-        uses: peter-evans/repository-dispatch@v1,
-        with: {
-            repository: 'brastak/ga-actions',
-            token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}',
-            event-type: 'release-event',
-            client-payload: '{"release": "${{ github.event.release.tag_name }}"}'
-        }
-    }]
+    steps:
+      - name: Run benchmarks
+        uses: brastak/ga-actions@master
+        with:
+          aws-access-key: '${{ secrets.PERF_AWS_ACCESS_KEY }}'
+          aws-secret-key: '${{ secrets.PERF_AWS_SECRET_KEY }}'
+          adapter: 'files'
+          sceanrio: 'upload-files.jmx'
+          version: "${{ github.event.release.tag_name }}"}'
+      - name: Publish reports
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: report
+          TARGET_FOLDER: ${{ github.event.release.tag_name }}/files/upload
