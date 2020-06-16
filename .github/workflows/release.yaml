@@ -23,7 +23,7 @@ jobs:
       - name: Publish reports
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
           BRANCH: gh-pages
           FOLDER: report
           TARGET_FOLDER: ${{ github.event.release.tag_name }}/files/upload
